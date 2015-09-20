@@ -11,17 +11,19 @@ import sys
 # from PyQt5.QtCore import *
 from PyQt5.QtWidgets import *
 from PyQt5 import uic
+from src.gui.mainwindow import Ui_MainWindow
 
+# First compile the ui files
+uic.compileUiDir('src/gui')
 
-class MainWindow(QMainWindow):
+class MainWindow(QMainWindow, Ui_MainWindow):
 
     def __init__(self, parent=None):
         QMainWindow.__init__(self)
         self.parent = parent
 
-        uic.loadUi('src/GUI/testmain.ui', self)
-
-        self.resize(100, 100)
+        # Apply Ui setup
+        self.setupUi(self)
 
 
 

@@ -2,7 +2,7 @@
 """
 Main file for app, a mind mapping tool
 
-Importe simplement la classe Arbo et lance le loop Qt
+Simply import Arbo (application) class and run Qt main loop
 
 author : Aurelien Cibrario <aurelien.cibrario@gmail.com>
 
