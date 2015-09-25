@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>DialogAbout</class>
+ <widget class="QDialog" name="DialogAbout">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>401</width>
+    <height>314</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Arbo - About</string>
+  </property>
+  <property name="windowIcon">
+   <iconset theme="help-about">
+    <normaloff>Tango icon set</normaloff>
+    <normalon>Tango icon set</normalon>
+    <disabledoff>Tango icon set</disabledoff>
+    <disabledon>Tango icon set</disabledon>
+    <activeoff>Tango icon set</activeoff>
+    <activeon>Tango icon set</activeon>
+    <selectedoff>Tango icon set</selectedoff>
+    <selectedon>Tango icon set</selectedon>Tango icon set</iconset>
+  </property>
+  <layout class="QVBoxLayout" name="verticalLayout">
+   <item>
+    <widget class="QLabel" name="labelAbout">
+     <property name="text">
+      <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;img src=&quot;:/icons/main.svg&quot;/&gt;&lt;span style=&quot; font-size:12pt; font-weight:600; vertical-align:middle;&quot;&gt;Arbo 0.01&lt;/span&gt;&lt;/p&gt;&lt;p&gt;Arbo is a simple and original mind mapping tool.&lt;/p&gt;&lt;p&gt;&lt;br/&gt;Instead of having one or multiple start point like moste similar tools, it works with Labels and has no particular organisation which let you make your own.&lt;/p&gt;&lt;p&gt;&lt;br/&gt;&lt;/p&gt;&lt;p&gt;Liscence : blabla&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+     </property>
+     <property name="wordWrap">
+      <bool>true</bool>
+     </property>
+     <property name="buddy">
+      <cstring>labelAbout</cstring>
+     </property>
+    </widget>
+   </item>
+   <item>
+    <widget class="QPushButton" name="closeAbout">
+     <property name="text">
+      <string>Fermer</string>
+     </property>
+    </widget>
+   </item>
+  </layout>
+ </widget>
+ <resources>
+  <include location="../icons/icons_rc.qrc"/>
+ </resources>
+ <connections>
+  <connection>
+   <sender>closeAbout</sender>
+   <signal>clicked()</signal>
+   <receiver>DialogAbout</receiver>
+   <slot>close()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>199</x>
+     <y>290</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>199</x>
+     <y>156</y>
+    </hint>
+   </hints>
+  </connection>
+ </connections>
+</ui>

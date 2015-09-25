@@ -12,5 +12,8 @@ import sys
 from src.app import Arbo
 
 if __name__ == '__main__':
-    app = Arbo(sys.argv)
+    #TODO : Vérifier ce qui se passe sur mon autre ordi, est-ce que l'argument gtk est passé automatiquement ?
+    arg = ['/home/aurelien/sketchbook/arbo/main.py','-style','gtk']
+    app = Arbo(arg)
     sys.exit(app.run())
+

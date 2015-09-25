@@ -1,0 +1,5 @@
+<RCC>
+  <qresource prefix="/icons" lang="test.truc">
+    <file>main.svg</file>
+  </qresource>
+</RCC>
