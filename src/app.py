@@ -63,7 +63,7 @@ class GenericEventFilter(QObject):
             return super().eventFilter(receiver, event)
 
 
-class MainWindow(QMainWindow, Argui.Ui_MainWindow):
+class MainWindow(QMainWindow):
     """
     Main Windows. Map entry points.
     """
@@ -77,20 +77,20 @@ class MainWindow(QMainWindow, Argui.Ui_MainWindow):
             QIcon.setThemeName('Mint-X')
 
         # Apply Ui setup
-        self.setupUi(self)
+        self.ui = Argui.Ui_MainWindow()
+        self.ui.setupUi(self)
+
+        # Instantiate IdeaManager
+        self.ideamanager = ArData.IdMan()
 
         # Instance Generic event filter and attach
         self.generic_filter = GenericEventFilter(False)#, 10, 11, 12, 110)
-        self.ui_table_view.installEventFilter(self.generic_filter)
+        self.ui.table_view.installEventFilter(self.generic_filter)
+
 
         # b1 = QPushButton('test', self.ui_central_widget)
         # b1.setObjectName('Bouton Hello')
         # self.horizontalLayout.addWidget(b1)
-
-
-
-
-
         data = ['test','bla','truc','bidule']
 
         #self.items = []
@@ -107,7 +107,7 @@ class MainWindow(QMainWindow, Argui.Ui_MainWindow):
         #self.model.insertRow(5, self.items2)
 
         self.table_view_model = QStandardItemModel()
-        self.ui_table_view.setModel(self.table_view_model)
+        self.ui.table_view.setModel(self.table_view_model)
 
         self.add_count = 0
 
@@ -124,12 +124,18 @@ class MainWindow(QMainWindow, Argui.Ui_MainWindow):
         w.ui = Argui.Ui_NewIdeaDialog()
         w.ui.setupUi(w)
         ok = w.exec()
-        if ok :
-            print(w.ui.lineEdit.text())
+        if ok:
+            idea = ArData.Idea()
+            idea.title = w.ui.title_input.text()
+            idea.comment = w.ui.comment_input.text()
+        self.ideamanager.save(idea)
+        self.table_view_model.appendRow([QStandardItem(idea.title), QStandardItem(idea.comment)])
+
+
 
     @pyqtSlot()
     def on_action_delete_triggered(self):
-        indexes = self.ui_table_view.selectionModel().selectedRows()
+        indexes = self.ui.table_view.selectionModel().selectedRows()
         for index in indexes:
             self.table_view_model.removeRow(index.row())
 
@@ -142,7 +148,7 @@ class MainWindow(QMainWindow, Argui.Ui_MainWindow):
 
     @pyqtSlot()
     def on_action_edit_triggered(self):
-        row = self.ui_table_view.currentIndex()
+        row = self.ui.table_view.currentIndex()
         print(row.row())
 
 

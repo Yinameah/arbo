@@ -14,6 +14,8 @@ class Idea():
         self.uuid = uuid4()
         self.title = title
         self.link_to = []
+        # provisoire
+        self.comment = ''
 
     def link_to(self, uuid):
         self.link_to.append(uuid)

@@ -17,3 +17,8 @@ class IdMan(object):
 
     def __init__(self):
         pass
+
+    def save(self, idea):
+        print('save that shit : ')
+        print(idea.title)
+        print(idea.comment)
