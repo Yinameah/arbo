@@ -1,4 +1,5 @@
 #!/usr/bin/env python3
+# -*- coding: utf-8 -*-
 """
 Main file for app, a mind mapping tool
 
@@ -12,8 +13,6 @@ import sys
 from src.app import Arbo
 
 if __name__ == '__main__':
-    #TODO : Vérifier ce qui se passe sur mon autre ordi, est-ce que l'argument gtk est passé automatiquement ?
-    arg = ['/home/aurelien/sketchbook/arbo/main.py','-style','gtk']
-    app = Arbo(arg)
+    app = Arbo(sys.argv)
     sys.exit(app.run())
 

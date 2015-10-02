@@ -2,8 +2,7 @@
 
 # Form implementation generated from reading ui file 'src/gui/dialogs/DialogAbout.ui'
 #
-# Created: Fri Sep 25 15:22:20 2015
-#      by: PyQt5 UI code generator 5.2.1
+# Created by: PyQt5 UI code generator 5.4.1
 #
 # WARNING! All changes made in this file will be lost!
 
@@ -12,7 +11,7 @@ from PyQt5 import QtCore, QtGui, QtWidgets
 class Ui_DialogAbout(object):
     def setupUi(self, DialogAbout):
         DialogAbout.setObjectName("DialogAbout")
-        DialogAbout.resize(401, 314)
+        DialogAbout.resize(412, 342)
         icon = QtGui.QIcon.fromTheme("help-about")
         DialogAbout.setWindowIcon(icon)
         self.verticalLayout = QtWidgets.QVBoxLayout(DialogAbout)
@@ -33,7 +32,7 @@ class Ui_DialogAbout(object):
     def retranslateUi(self, DialogAbout):
         _translate = QtCore.QCoreApplication.translate
         DialogAbout.setWindowTitle(_translate("DialogAbout", "Arbo - About"))
-        self.labelAbout.setText(_translate("DialogAbout", "<html><head/><body><p><img src=\":/icons/main.svg\"/><span style=\" font-size:12pt; font-weight:600; vertical-align:middle;\">Arbo 0.01</span></p><p>Arbo is a simple and original mind mapping tool.</p><p><br/>Instead of having one or multiple start point like moste similar tools, it works with Labels and has no particular organisation which let you make your own.</p><p><br/></p><p>Liscence : blabla</p></body></html>"))
+        self.labelAbout.setText(_translate("DialogAbout", "<html><head/><body><p><img src=\":/icons/main.svg\" style=\"vertical-align: middle;\"/><span style=\" font-size:12pt; font-weight:600; vertical-align:middle;\">Arbo 0.01</span></p><p>Arbo is a simple and original mind mapping tool.</p><p><br/>Instead of having one or multiple start point like most similar tools, it works with Labels and has no particular organisation which let you make your own.</p><p><br/></p><p>Liscence : blabla</p></body></html>"))
         self.closeAbout.setText(_translate("DialogAbout", "Fermer"))
 
 from . import icons_rc

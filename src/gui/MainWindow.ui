@@ -14,15 +14,24 @@
    <string>Arbo</string>
   </property>
   <property name="windowIcon">
-   <iconset theme="applications-utilities"/>
+   <iconset theme="applications-utilities">
+    <normaloff/>
+   </iconset>
   </property>
   <property name="accessibleName">
    <string/>
   </property>
-  <widget class="QWidget" name="centralwidget">
+  <widget class="QWidget" name="ui_central_widget">
    <layout class="QHBoxLayout" name="horizontalLayout">
     <item>
-     <widget class="QListView" name="listView2"/>
+     <widget class="QTreeView" name="ui_table_view">
+      <property name="editTriggers">
+       <set>QAbstractItemView::NoEditTriggers</set>
+      </property>
+      <property name="selectionMode">
+       <enum>QAbstractItemView::ExtendedSelection</enum>
+      </property>
+     </widget>
     </item>
    </layout>
   </widget>
@@ -36,11 +45,10 @@
    <attribute name="toolBarBreak">
     <bool>false</bool>
    </attribute>
-   <addaction name="actionNew"/>
-   <addaction name="actionOpen"/>
-   <addaction name="actionDelete"/>
+   <addaction name="action_new"/>
+   <addaction name="action_delete"/>
   </widget>
-  <widget class="QMenuBar" name="mainMenuBar">
+  <widget class="QMenuBar" name="ui_main_menu_bar">
    <property name="geometry">
     <rect>
      <x>0</x>
@@ -49,31 +57,31 @@
      <height>25</height>
     </rect>
    </property>
-   <widget class="QMenu" name="menuHelp">
+   <widget class="QMenu" name="ui_menu_help">
     <property name="title">
      <string>?</string>
     </property>
-    <addaction name="actionAbout"/>
+    <addaction name="action_about"/>
    </widget>
-   <widget class="QMenu" name="menuFile">
+   <widget class="QMenu" name="ui_menu_file">
     <property name="title">
      <string>Fichier</string>
     </property>
-    <addaction name="actionNew"/>
-    <addaction name="actionOpen"/>
-    <addaction name="actionDelete"/>
+    <addaction name="action_new"/>
+    <addaction name="action_edit"/>
+    <addaction name="action_delete"/>
     <addaction name="separator"/>
-    <addaction name="actionQuit"/>
+    <addaction name="action_quit"/>
    </widget>
-   <addaction name="menuFile"/>
-   <addaction name="menuHelp"/>
+   <addaction name="ui_menu_file"/>
+   <addaction name="ui_menu_help"/>
   </widget>
-  <action name="actionAbout">
+  <action name="action_about">
    <property name="text">
     <string>À propos</string>
    </property>
   </action>
-  <action name="actionNew">
+  <action name="action_new">
    <property name="checkable">
     <bool>false</bool>
    </property>
@@ -92,28 +100,20 @@
     <string>Ctrl+N</string>
    </property>
   </action>
-  <action name="actionOpen">
+  <action name="action_delete">
    <property name="icon">
-    <iconset theme="document-open">
+    <iconset theme="edit-delete">
      <normaloff/>
     </iconset>
    </property>
    <property name="text">
-    <string>Ouvrir</string>
-   </property>
-   <property name="shortcut">
-    <string>Ctrl+O</string>
-   </property>
-  </action>
-  <action name="actionDelete">
-   <property name="icon">
-    <iconset theme="edit-delete"/>
-   </property>
-   <property name="text">
     <string>Effacer</string>
    </property>
+   <property name="shortcut">
+    <string>Ctrl+D</string>
+   </property>
   </action>
-  <action name="actionQuit">
+  <action name="action_quit">
    <property name="icon">
     <iconset theme="application-exit">
      <normaloff/>
@@ -129,44 +129,20 @@
     <enum>Qt::WindowShortcut</enum>
    </property>
   </action>
+  <action name="action_cursor">
+   <property name="text">
+    <string>changer curseur</string>
+   </property>
+  </action>
+  <action name="action_edit">
+   <property name="text">
+    <string>Editer</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+E</string>
+   </property>
+  </action>
  </widget>
  <resources/>
- <connections>
-  <connection>
-   <sender>actionQuit</sender>
-   <signal>triggered()</signal>
-   <receiver>MainWindow</receiver>
-   <slot>close()</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>-1</x>
-     <y>-1</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>399</x>
-     <y>299</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>actionAbout</sender>
-   <signal>triggered()</signal>
-   <receiver>MainWindow</receiver>
-   <slot>on_actionAboutTriggered()</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>-1</x>
-     <y>-1</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>399</x>
-     <y>299</y>
-    </hint>
-   </hints>
-  </connection>
- </connections>
- <slots>
-  <slot>on_actionQuitTriggered()</slot>
-  <slot>on_actionAboutTriggered()</slot>
- </slots>
+ <connections/>
 </ui>
