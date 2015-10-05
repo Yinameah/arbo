@@ -109,7 +109,9 @@ class MainWindow(QMainWindow):
         self.table_view_model = QStandardItemModel()
         self.ui.table_view.setModel(self.table_view_model)
 
-        self.add_count = 0
+        # Load stored ideas
+        self.table_view_model.appendRow()
+
 
 
 
@@ -120,9 +122,11 @@ class MainWindow(QMainWindow):
         #print(count)
         #self.table_view_model.insertRow(count, [QStandardItem('test {}'.format(self.add_count)), QStandardItem('machin')])
 
+        # Create dialog
         w = QDialog(self)
         w.ui = Argui.Ui_NewIdeaDialog()
         w.ui.setupUi(w)
+        # When dialog is accepted, create idea, store and display
         ok = w.exec()
         if ok:
             idea = ArData.Idea()
