@@ -22,6 +22,7 @@ class Ui_MainWindow(object):
         self.table_view = QtWidgets.QTreeView(self.central_widget)
         self.table_view.setEditTriggers(QtWidgets.QAbstractItemView.NoEditTriggers)
         self.table_view.setSelectionMode(QtWidgets.QAbstractItemView.ExtendedSelection)
+        self.table_view.setSelectionBehavior(QtWidgets.QAbstractItemView.SelectRows)
         self.table_view.setObjectName("table_view")
         self.horizontalLayout.addWidget(self.table_view)
         MainWindow.setCentralWidget(self.central_widget)

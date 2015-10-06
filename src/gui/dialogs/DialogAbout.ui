@@ -28,7 +28,7 @@
    <item>
     <widget class="QLabel" name="labelAbout">
      <property name="text">
-      <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;img src=&quot;:/icons/main.svg&quot; style=&quot;vertical-align: middle;&quot;/&gt;&lt;span style=&quot; font-size:12pt; font-weight:600; vertical-align:middle;&quot;&gt;Arbo 0.01&lt;/span&gt;&lt;/p&gt;&lt;p&gt;Arbo is a simple and original mind mapping tool.&lt;/p&gt;&lt;p&gt;&lt;br/&gt;Instead of having one or multiple start point like most similar tools, it works with Labels and has no particular organisation which let you make your own.&lt;/p&gt;&lt;p&gt;&lt;br/&gt;&lt;/p&gt;&lt;p&gt;Liscence : blabla&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+      <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;img src=&quot;:/icons/main.svg&quot; style=&quot;vertical-align: middle;&quot;/&gt;&lt;span style=&quot; font-size:12pt; font-weight:600; vertical-align:middle;&quot;&gt;Arbo 0.01 &lt;/span&gt;&lt;/p&gt;&lt;p&gt;Arbo is a simple and original mind mapping tool.&lt;/p&gt;&lt;p&gt;&lt;br/&gt;Instead of having one or multiple start point like most similar tools, it works with Labels and has no particular organisation which let you make your own.&lt;/p&gt;&lt;p&gt;&lt;br/&gt;&lt;/p&gt;&lt;p&gt;Liscence : blabla&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
      </property>
      <property name="wordWrap">
       <bool>true</bool>

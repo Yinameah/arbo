@@ -32,7 +32,7 @@ class Ui_DialogAbout(object):
     def retranslateUi(self, DialogAbout):
         _translate = QtCore.QCoreApplication.translate
         DialogAbout.setWindowTitle(_translate("DialogAbout", "Arbo - About"))
-        self.labelAbout.setText(_translate("DialogAbout", "<html><head/><body><p><img src=\":/icons/main.svg\" style=\"vertical-align: middle;\"/><span style=\" font-size:12pt; font-weight:600; vertical-align:middle;\">Arbo 0.01</span></p><p>Arbo is a simple and original mind mapping tool.</p><p><br/>Instead of having one or multiple start point like most similar tools, it works with Labels and has no particular organisation which let you make your own.</p><p><br/></p><p>Liscence : blabla</p></body></html>"))
+        self.labelAbout.setText(_translate("DialogAbout", "<html><head/><body><p><img src=\":/icons/main.svg\" style=\"vertical-align: middle;\"/><span style=\" font-size:12pt; font-weight:600; vertical-align:middle;\">Arbo 0.01 </span></p><p>Arbo is a simple and original mind mapping tool.</p><p><br/>Instead of having one or multiple start point like most similar tools, it works with Labels and has no particular organisation which let you make your own.</p><p><br/></p><p>Liscence : blabla</p></body></html>"))
         self.closeAbout.setText(_translate("DialogAbout", "Fermer"))
 
 from . import icons_rc

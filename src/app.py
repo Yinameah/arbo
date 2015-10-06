@@ -106,13 +106,43 @@ class MainWindow(QMainWindow):
         #self.model.insertRow(1, self.items)
         #self.model.insertRow(5, self.items2)
 
+        """
+        Dealing with view model
+        """
+        # Create model for ideas viewing
         self.table_view_model = QStandardItemModel()
+        #  Get Idea features labels and assign to model
+        labels = [x for x in ArData.Idea.features_dict().values()]
+        self.table_view_model.setHorizontalHeaderLabels(labels)
+
+        # Assign model to table
         self.ui.table_view.setModel(self.table_view_model)
 
         # Load stored ideas
-        self.table_view_model.appendRow()
+        for idea in self.ideamanager.loadall():
+            self.add_idea_to_model(idea, self.table_view_model)
 
 
+    def add_idea_to_model(self, idea, model):
+        """
+        Add given idea to given model
+
+        Create a list of QStandardItem and add to given model.
+        Add idea's uuid to fist item
+
+        :param model: a QStandartItemModel
+        :param idea: an idea to display
+        """
+        # Get the features names
+        feature_names = [x for x in idea.features_dict()]
+        # Generate list of QstandartItem
+        item_list = [QStandardItem(getattr(idea, x)) for x in feature_names]
+        # Put UUID in first item to keep trace
+        # First item in line will be returned by QStandardItemModel.selectionModel().selectedRows()
+        item_list[0].uuid = idea.uuid
+
+        # Append row to model
+        model.appendRow(item_list)
 
 
     @pyqtSlot()
@@ -129,19 +159,27 @@ class MainWindow(QMainWindow):
         # When dialog is accepted, create idea, store and display
         ok = w.exec()
         if ok:
+            # New idea
             idea = ArData.Idea()
+            # add info from dialog
             idea.title = w.ui.title_input.text()
             idea.comment = w.ui.comment_input.text()
-        self.ideamanager.save(idea)
-        self.table_view_model.appendRow([QStandardItem(idea.title), QStandardItem(idea.comment)])
 
-
+            self.add_idea_to_model(idea, self.table_view_model)
+            self.ideamanager.save(idea)
 
     @pyqtSlot()
     def on_action_delete_triggered(self):
+        # get mouse selection
         indexes = self.ui.table_view.selectionModel().selectedRows()
+
+        # get uuid in first item and delete idea
         for index in indexes:
-            self.table_view_model.removeRow(index.row())
+            item = self.table_view_model.itemFromIndex(index)
+            self.ideamanager.delete(item.uuid)
+
+        # remove all selected rows
+        self.table_view_model.removeRows(indexes[0].row(), len(indexes))
 
     @pyqtSlot()
     def on_action_about_triggered(self):

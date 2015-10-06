@@ -2,15 +2,15 @@
 # -*- coding: utf-8 -*-
 
 import yaml
-import json
 import os
-import sysconfig
+from PyQt5.QtGui import QStandardItemModel
+
 
 from src.data.ideas import Idea
 
 
-IDEAS_MANIFEST_LOCATION = os.path.expanduser('~/.config/arbo/ideas/manifest.idea')
-IDEAS_STORE_LOCATION = os.path.expanduser('~/.config/arbo/ideas/')
+IDEAS_MANIFEST_LOCATION = os.path.expanduser('~/.arbo/ideas/manifest.idea')
+IDEAS_STORE_LOCATION = os.path.expanduser('~/.arbo/ideas/')
 
 class IdMan(object):
     _is_instance = False
@@ -44,7 +44,7 @@ class IdMan(object):
 
         self.manifest.append(idea.uuid)
         with open(IDEAS_MANIFEST_LOCATION, 'w') as f:
-            print(self.manifest, file=f)
+            yaml.safe_dump(self.manifest, f)
 
     def loadall(self):
         for idea in self.manifest:
@@ -62,11 +62,27 @@ class IdMan(object):
                 #print(y_result)
         except (IOError, OSError):
             print('putain, ça a merdé !!')
-            print("Cette erreur est due à une idée qui n'a pas été retrouvée")
+            print("une idée n'a pas été retrouvée, on va l'enlever du manifeste")
+            self.manifest.remove(uuid_to_load)
+            self.save_manifest()
+            return None
+        else:
+            idea = Idea()
+            idea.__dict__ = y_result
+            return idea
 
-        idea = Idea()
-        idea.__dict__ = y_result
-        return idea
+    def delete(self, uuid_to_delete):
+        filename = str(uuid_to_delete)+'.idea'
+        file = os.path.join(IDEAS_STORE_LOCATION, filename)
+        # delete files
+        os.remove(file)
+        # remove from manifest
+        self.manifest.remove(uuid_to_delete)
+        self.save_manifest()
+
+    def save_manifest(self):
+        with open(IDEAS_MANIFEST_LOCATION, 'w') as f:
+            yaml.safe_dump(self.manifest, f)
 
 
 
