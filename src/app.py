@@ -8,59 +8,19 @@ author : 'Aurelien Cibrario <aurelien.cibrario@gmail.com>'
 
 """
 
-# First compile the ui/rc files / debugging state
-from PyQt5 import uic
-uic.compileUiDir('src/gui', recurse=True, from_imports=True, execute=True, resource_suffix='')
-from subprocess import call
-call(['pyrcc5', 'src/gui/icons/icons_rc.qrc', '-o', 'src/gui/icons/icons_rc.py'])
-
 import sys
 import platform
 from PyQt5.QtCore import *
 from PyQt5.QtWidgets import *
 from PyQt5.QtGui import *
 
+import src.CompileUiFiles
+from src.gui.GenericEventFilter import GenericEventFilter
 import src.gui as Argui
 from src.data import idea_manager as ArData
 import src.data as ArData
 
 
-class GenericEventFilter(QObject):
-    """
-    Affiche tous les types d'event sur stout pour aider à la création
-    On peut l'instancier avec un type (QEvent class) pour ne trier que ceux-là
-    """
-
-    def __init__(self, display, *args):
-        QObject.__init__(self)
-
-        if args == ():
-            args = 'all'
-        self.event_type_to_filter = args
-        self.display = display
-
-    def eventFilter(self, receiver, event):
-        # print all
-        if self.display and self.event_type_to_filter == 'all':
-            print("{} received event {} with QEvent number {}".format(
-                receiver.objectName(), type(event), event.type()))
-            return False
-        # print all event in args
-        elif self.display and event.type() in self.event_type_to_filter:
-            print("{} received event {} with QEvent number {}".format(
-                receiver.objectName(), type(event), event.type()))
-            return False
-        # display false without args : nothing to print
-        elif not self.display and self.event_type_to_filter == 'all':
-            return False
-        # display false : print other than in args
-        elif not self.display and event.type() not in self.event_type_to_filter:
-            print("{} received event {} with QEvent number {}".format(
-                receiver.objectName(), type(event), event.type()))
-            return False
-        # all other events
-        else:
-            return super().eventFilter(receiver, event)
 
 
 class MainWindow(QMainWindow):
@@ -68,9 +28,8 @@ class MainWindow(QMainWindow):
     Main Windows. Map entry points.
     """
 
-    def __init__(self, parent=None):
+    def __init__(self, parent=None, qtflags=0):
         QMainWindow.__init__(self)
-        self.parent = parent
 
         # Make sure my laptop find the right theme to display icons
         if QIcon.themeName() == '' and 'LinuxMintseitur' in platform.platform():
@@ -83,9 +42,9 @@ class MainWindow(QMainWindow):
         # Instantiate IdeaManager
         self.ideamanager = ArData.IdMan()
 
-        # Instance Generic event filter and attach
-        self.generic_filter = GenericEventFilter(False)#, 10, 11, 12, 110)
-        self.ui.table_view.installEventFilter(self.generic_filter)
+        # Create dict to open multiple map widgets
+        self.map_windows = {}
+
 
 
         # b1 = QPushButton('test', self.ui_central_widget)
@@ -105,6 +64,11 @@ class MainWindow(QMainWindow):
 
         #self.model.insertRow(1, self.items)
         #self.model.insertRow(5, self.items2)
+        """
+        Dealing with custom connections
+        Note that connection to actions are automatically done with the name
+        """
+        self.ui.table_view.doubleClicked.connect(self.on_table_double_click)
 
         """
         Dealing with view model
@@ -122,6 +86,11 @@ class MainWindow(QMainWindow):
         for idea in self.ideamanager.loadall():
             self.add_idea_to_model(idea, self.table_view_model)
 
+
+
+        # Instance Generic event filter and attach
+        self.generic_filter = GenericEventFilter(False)#, 10, 11, 12, 110)
+        self.installEventFilter(self.generic_filter)
 
     def add_idea_to_model(self, idea, model):
         """
@@ -144,6 +113,16 @@ class MainWindow(QMainWindow):
         # Append row to model
         model.appendRow(item_list)
 
+    @pyqtSlot()
+    def on_table_double_click(self):
+        sender = self.sender()
+        index = sender.selectionModel().selectedRows()
+        item = self.table_view_model.itemFromIndex(index[0])
+        #print(item.uuid)
+
+        self.map_windows[item.uuid] = Argui.MapWindow()
+        self.map_windows[item.uuid].setWindowTitle('Map around {}'.format(item.text()))
+        self.map_windows[item.uuid].show()
 
     @pyqtSlot()
     def on_action_new_triggered(self):
@@ -173,7 +152,8 @@ class MainWindow(QMainWindow):
         # get mouse selection
         indexes = self.ui.table_view.selectionModel().selectedRows()
 
-        # get uuid in first item and delete idea
+        # get uuid in
+        # first item and delete idea
         for index in indexes:
             item = self.table_view_model.itemFromIndex(index)
             self.ideamanager.delete(item.uuid)

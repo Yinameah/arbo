@@ -1,3 +1,6 @@
+"""
+Working event Filter exemple. Here to remember
+"""
 import sys
 from PyQt5.QtWidgets import *
 from PyQt5.QtCore import *

@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-# Form implementation generated from reading ui file 'src/gui/MainWindow.ui'
+# Form implementation generated from reading ui file '/home/aurelien/sketchbook/arbo/src/gui/MainWindow.ui'
 #
 # Created by: PyQt5 UI code generator 5.4.1
 #
@@ -11,7 +11,7 @@ from PyQt5 import QtCore, QtGui, QtWidgets
 class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
         MainWindow.setObjectName("MainWindow")
-        MainWindow.resize(801, 600)
+        MainWindow.resize(801, 599)
         icon = QtGui.QIcon.fromTheme("applications-utilities")
         MainWindow.setWindowIcon(icon)
         MainWindow.setAccessibleName("")
@@ -26,9 +26,9 @@ class Ui_MainWindow(object):
         self.table_view.setObjectName("table_view")
         self.horizontalLayout.addWidget(self.table_view)
         MainWindow.setCentralWidget(self.central_widget)
-        self.mainToolBar = QtWidgets.QToolBar(MainWindow)
-        self.mainToolBar.setObjectName("mainToolBar")
-        MainWindow.addToolBar(QtCore.Qt.TopToolBarArea, self.mainToolBar)
+        self.main_tool_bar = QtWidgets.QToolBar(MainWindow)
+        self.main_tool_bar.setObjectName("main_tool_bar")
+        MainWindow.addToolBar(QtCore.Qt.TopToolBarArea, self.main_tool_bar)
         self.main_menu_bar = QtWidgets.QMenuBar(MainWindow)
         self.main_menu_bar.setGeometry(QtCore.QRect(0, 0, 801, 25))
         self.main_menu_bar.setObjectName("main_menu_bar")
@@ -58,8 +58,8 @@ class Ui_MainWindow(object):
         self.action_cursor.setObjectName("action_cursor")
         self.action_edit = QtWidgets.QAction(MainWindow)
         self.action_edit.setObjectName("action_edit")
-        self.mainToolBar.addAction(self.action_new)
-        self.mainToolBar.addAction(self.action_delete)
+        self.main_tool_bar.addAction(self.action_new)
+        self.main_tool_bar.addAction(self.action_delete)
         self.menu_help.addAction(self.action_about)
         self.menu_file.addAction(self.action_new)
         self.menu_file.addAction(self.action_edit)
@@ -75,7 +75,7 @@ class Ui_MainWindow(object):
     def retranslateUi(self, MainWindow):
         _translate = QtCore.QCoreApplication.translate
         MainWindow.setWindowTitle(_translate("MainWindow", "Arbo"))
-        self.mainToolBar.setWindowTitle(_translate("MainWindow", "toolBar"))
+        self.main_tool_bar.setWindowTitle(_translate("MainWindow", "toolBar"))
         self.menu_help.setTitle(_translate("MainWindow", "?"))
         self.menu_file.setTitle(_translate("MainWindow", "Fichier"))
         self.action_about.setText(_translate("MainWindow", "À propos"))

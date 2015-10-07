@@ -1,0 +1,96 @@
+#!/usr/bin/env python3
+
+import sys
+from PyQt5.QtWidgets import *
+from PyQt5.QtGui import *
+from PyQt5.QtCore import *
+import src.CompileUiFiles
+from src.gui.widgets.RenderArea import Ui_RenderArea
+
+
+#class ResizableRect(QGraphicsRectItem):
+
+class BolchevikRect(QGraphicsRectItem):
+
+    def __init__(self, rectF=None):
+        # provide default rectF, @ (0,0) position
+        if rectF is None:
+            rectF = QRectF(0, 0, 100, 100)
+        QGraphicsRectItem.__init__(self, rectF)
+
+        pen = QPen(Qt.DotLine)
+        pen.setWidthF(2)
+        self.setPen(pen)
+
+        self._hidden = True
+
+        #self.pen.setWidthF(2)
+        #self.setPen(self.pen)
+
+    def mousePressEvent(self, event):
+        if self._hidden :
+            color = QColor('red')
+            pen = self.pen()
+            pen.setColor(color)
+            self.setPen(pen)
+
+            self.setRect(QRectF(200, 200, 100, 100))
+            self._hidden = False
+        else:
+            color = QColor('black')
+            pen = self.pen()
+            pen.setColor(color)
+            self.setPen(pen)
+
+            self.setRect(QRectF(0, 0, 100, 100))
+            self._hidden = True
+
+
+class RenderAreaWindows(QWidget):
+
+    def __init__(self):
+        QWidget.__init__(self)
+
+        # Apply setupUI
+        self.ui = Ui_RenderArea()
+        self.ui.setupUi(self)
+
+        scene = QGraphicsScene()
+        self.ui.graphics_view.setScene(scene)
+
+        rect = QRectF(0, 0, 50, 20)
+        pen = QPen()#Qt.DashDotDotLine)
+        pen.setWidthF(2)
+        brush = QBrush()#Qt.Dense2Pattern)
+        #scene.addRect(rect, pen, brush)
+
+
+        self.rect = BolchevikRect()
+        #self.rect.setPen(pen)
+        scene.addItem(self.rect)
+
+
+#    def paintEvent(self, event):
+#        qp = QPainter()
+#        qp.begin(self)
+#        self.draw_rect(qp)
+#        print(qp)
+#        qp.end()
+#
+#    def draw_rect(self, painter):
+#        col = QColor(1, 0, 0)
+#        painter.setPen(col)
+#
+#        painter.drawRect(10, 15, 90, 60)
+
+
+
+
+if __name__ == '__main__':
+
+    app = QApplication(sys.argv)
+
+    w = RenderAreaWindows()
+    w.show()
+
+    app.exec()

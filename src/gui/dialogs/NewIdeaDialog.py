@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-# Form implementation generated from reading ui file 'src/gui/dialogs/NewIdeaDialog.ui'
+# Form implementation generated from reading ui file '/home/aurelien/sketchbook/arbo/src/gui/dialogs/NewIdeaDialog.ui'
 #
 # Created by: PyQt5 UI code generator 5.4.1
 #
